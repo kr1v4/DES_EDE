@@ -2,9 +2,9 @@
 #define BITARRAY_HPP
 
 #include <iostream>
-#include <cstdint>
+#include <vector>
 #include <string>
-#include <cmath>
+
 
 class bitarray
 {
@@ -22,7 +22,7 @@ public:
 	void set(size_t pos, bool bit);
 	bool test(size_t pos) const;
 	void cyclic_rotate(size_t n, bool to_left = true);
-	bitarray sub_bitarray(size_t from_pos, size_t n);
+	bitarray sub_bitarray(size_t from_pos, size_t n) const;
 
 	std::string to_string() const;
 

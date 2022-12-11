@@ -186,7 +186,7 @@ void bitarray::cyclic_rotate(size_t n, bool to_left)
 	}
 }
 
-bitarray bitarray::sub_bitarray(size_t from_pos, size_t n)
+bitarray bitarray::sub_bitarray(size_t from_pos, size_t n) const
 {
 	if (from_pos <= m_array_size && from_pos + n <= m_array_size)
 	{

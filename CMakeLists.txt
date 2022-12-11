@@ -8,6 +8,8 @@ add_executable(${PROJECT_NAME}
 	src/main.cpp
 	src/bitarray/bitarray.cpp
 	src/bitarray/bitarray.hpp
+	src/keygen/keygen.cpp
+	src/keygen/keygen.hpp
 	)
 
 set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT ${PROJECT_NAME})

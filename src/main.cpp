@@ -1,10 +1,14 @@
-#include "bitarray/bitarray.hpp"
+#include "keygen/keygen.hpp"
 
 int main()
 {
-	bitarray b("1000010000100010001110101111001111");
-	bitarray c("0011010010101110101110101100001011");
 
+	bitarray input_key("0001001100110100010101110111100110011011101111001101111111110001");
 
-	bitarray d = b ^ c;
+	std::vector<bitarray> temp = keygen::generate_round_keys(input_key);
+
+	for (auto& key : temp)
+	{
+		std::cout << key << "\n";
+	}
 }
