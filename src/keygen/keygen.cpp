@@ -7,18 +7,34 @@ std::vector<bitarray> keygen::generate_round_keys(const bitarray& key64)
     {
         std::vector<bitarray> generated_keys;
 
+        std::cout << "Input Key:" << key64 << "\n";
+
         bitarray permutated_key56 = PC1(key64);
+
+        std::cout << "Permutated Key: " << permutated_key56 << "\n";
+
         bitarray left_block28;
         bitarray right_block28;
+
         split_permutated_key(permutated_key56, left_block28, right_block28);
 
         for (size_t i = 0; i < m_amount_of_keys; ++i)
         {
+            std::cout << "Current L: " << left_block28 << "\n";
+            std::cout << "Current R: " << right_block28 << "\n";
             bitarray current_key48;
             left_rotate_blocks(left_block28, right_block28, i);
+
+            std::cout << "Rotate n = " << i << "\n";
+
+            std::cout << "Rotated L: " << left_block28 << "\n";
+            std::cout << "Rotated R: " << right_block28 << "\n";
+
             bitarray joined_block56 = join_blocks(left_block28, right_block28);
 
             bitarray round_key48 = PC2(joined_block56);
+
+            std::cout << "generated key: " << round_key48 << "\n";
             generated_keys.push_back(round_key48);
         }
         return generated_keys;
@@ -49,9 +65,7 @@ bitarray keygen::PC1(const bitarray& key64)
             21  , 13  , 5   , 28  , 20  , 12  , 4
 
         };
-
         bitarray permutated_key56;
-
         for (size_t i = 0; i < m_permutated_key_length; ++i)
         {
             permutated_key56.push_back(key64.test(pc1[i] - 1));
