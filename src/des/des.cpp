@@ -53,6 +53,23 @@ std::string des::process(std::string data_string, std::string key_string, DES_MO
 	return result;
 }
 
+std::string des::EDE(std::string data_string, std::string key_string, std::string key_string2, DES_MODE mode)
+{
+	if (mode == DES_MODE::ENCRYPT)
+	{
+		std::string enc_pt_key = des::process(data_string, key_string);
+		std::string dec_pt_key2 = des::process(enc_pt_key, key_string2, DES_MODE::DECRYPT);
+		std::string enc_pt_key_finish = des::process(dec_pt_key2, key_string);
+
+		return enc_pt_key_finish;
+	}
+
+	std::string dec_pt_key = des::process(data_string, key_string, DES_MODE::DECRYPT);
+	std::string enc_pt_key2 = des::process(dec_pt_key, key_string2);
+	std::string dec_pt_key_finish = des::process(enc_pt_key2, key_string, DES_MODE::DECRYPT);
+	return dec_pt_key_finish;
+}
+
 void des::fit_string(std::string &data_string)
 {
 	while (data_string.size()*8 < m_block_size || data_string.size()*8 % m_block_size != 0)

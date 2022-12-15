@@ -13,6 +13,7 @@ class des
 	public:
 
 		static std::string process(std::string data_string, std::string key_string, DES_MODE mode = DES_MODE::ENCRYPT);
+		static std::string EDE(std::string data_string, std::string key_strin, std::string key_string2, DES_MODE mode = DES_MODE::ENCRYPT);
 
 	public:
 

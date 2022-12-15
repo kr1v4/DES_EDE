@@ -7,11 +7,15 @@ std::vector<bitarray> keygen::generate_round_keys(const bitarray& key64)
     {
         std::vector<bitarray> generated_keys;
 
+#ifdef LOG
         std::cout << "Input Key:" << key64 << "\n";
+#endif // LOG
 
         bitarray permutated_key56 = PC1(key64);
 
+#ifdef LOG
         std::cout << "Permutated Key: " << permutated_key56 << "\n";
+#endif // LOG
 
         bitarray left_block28;
         bitarray right_block28;
@@ -20,21 +24,27 @@ std::vector<bitarray> keygen::generate_round_keys(const bitarray& key64)
 
         for (size_t i = 0; i < m_amount_of_keys; ++i)
         {
+#ifdef  LOG
             std::cout << "Current L: " << left_block28 << "\n";
             std::cout << "Current R: " << right_block28 << "\n";
+#endif 
             bitarray current_key48;
             left_rotate_blocks(left_block28, right_block28, i);
-
+#ifdef LOG
             std::cout << "Rotate n = " << i << "\n";
 
             std::cout << "Rotated L: " << left_block28 << "\n";
             std::cout << "Rotated R: " << right_block28 << "\n";
+#endif // LOG
 
             bitarray joined_block56 = join_blocks(left_block28, right_block28);
 
             bitarray round_key48 = PC2(joined_block56);
 
+#ifdef LOG
             std::cout << "generated key: " << round_key48 << "\n";
+#endif // LOG
+
             generated_keys.push_back(round_key48);
         }
         return generated_keys;
